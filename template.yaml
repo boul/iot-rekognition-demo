@@ -18,7 +18,7 @@ Resources:
     CamTrigger:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
-            CodeUri: cam_trigger
+            CodeUri: cam_trigger/build
             Handler: cam_trigger.lambda_handler
             Runtime: python3.6
             Tracing: Active  # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
@@ -42,7 +42,7 @@ Resources:
     PictureResults:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
-            CodeUri: picture_results
+            CodeUri: picture_results/build
             Handler: picture_results.lambda_handler
             Runtime: python3.6
             Tracing: Active  # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
@@ -71,6 +71,7 @@ Resources:
             Handler: picture_taker.lambda_handler
             Runtime: python2.7
             Timeout: 60
+            Tracing: Active
            
            
            

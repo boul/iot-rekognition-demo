@@ -30,7 +30,7 @@ Outputs:
 Resources:
   CamTrigger:
     Properties:
-      CodeUri: s3://iot-mirror-eu-central-1/bc0c6942d4081d1fb00fbad1d8bd82f3
+      CodeUri: s3://iot-mirror-eu-central-1/a7df558ec98c0c28785e98bc8f6ae7f8
       Environment:
         Variables:
           PARAM1: VALUE
@@ -54,7 +54,7 @@ Resources:
     Type: AWS::Serverless::Function
   PictureResults:
     Properties:
-      CodeUri: s3://iot-mirror-eu-central-1/b40385524ea23936329cd0b535151e4f
+      CodeUri: s3://iot-mirror-eu-central-1/d25c732dd9fccf09444611e131f87bb7
       Environment:
         Variables:
           PARAM1: VALUE
@@ -78,9 +78,10 @@ Resources:
     Type: AWS::Serverless::Function
   PictureTaker:
     Properties:
-      CodeUri: s3://iot-mirror-eu-central-1/d9460f7edf54d1c47dc37ba99b820bfc
+      CodeUri: s3://iot-mirror-eu-central-1/cb42e91e51a5e64c8e4a5961ddeaf467
       Handler: picture_taker.lambda_handler
       Runtime: python2.7
       Timeout: 60
+      Tracing: Active
     Type: AWS::Serverless::Function
 Transform: AWS::Serverless-2016-10-31
