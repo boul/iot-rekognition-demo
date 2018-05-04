@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    iot_mirror
+    
+    Demo of Greengrass Iot PiCam and Rekognition
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 5
+        AutoPublishAlias: live # More info about Safe Deployments: https://github.com/awslabs/serverless-application-model/blob/master/docs/safe_lambda_deployments.rst
+        DeploymentPreference:
+            # Type: Linear10PercentEvery1Minute 
+            Type: AllAtOnce
+
+Resources:
+    CamTrigger:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: cam_trigger
+            Handler: cam_trigger.lambda_handler
+            Runtime: python3.6
+            Tracing: Active  # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
+            Policies:
+             - Version: '2012-10-17' # Policy Document
+               Statement:
+                - Effect: Allow
+                  Action:
+                    - iot:Publish
+                    - iot:GetThingShadow
+                  Resource: '*'
+            Events:
+                Api:
+                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    Properties:
+                        Path: /trigger
+                        Method: GET
+            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                Variables:
+                    PARAM1: VALUE
+    PictureResults:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: picture_results
+            Handler: picture_results.lambda_handler
+            Runtime: python3.6
+            Tracing: Active  # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
+            Policies:
+             - Version: '2012-10-17' # Policy Document
+               Statement:
+                - Effect: Allow
+                  Action:
+                    - iot:Publish
+                    - iot:GetThingShadow
+                  Resource: '*'
+            Events:
+                Api:
+                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    Properties:
+                        Path: /results
+                        Method: GET
+            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                Variables:
+                    PARAM1: VALUE
+                    
+    PictureTaker:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: picture_taker
+            Handler: picture_taker.lambda_handler
+            Runtime: python2.7
+            Timeout: 60
+           
+           
+           
+
+
+Outputs:
+
+    ApigwURL:
+      Description: "API Gateway endpoint URL for Prod environment for First Function"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/trigger"
+
+    CamTrigger:
+      Description: "CamTrigger Function ARN"
+      Value: !GetAtt CamTrigger.Arn
+    
+    PictureTaker:
+      Description: "PictureTaker Function ARN"
+      Value: !GetAtt PictureTaker.Arn
+

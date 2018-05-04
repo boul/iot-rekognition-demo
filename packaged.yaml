@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'iot_mirror
+
+  Demo of Greengrass Iot PiCam and Rekognition
+
+  '
+Globals:
+  Function:
+    AutoPublishAlias: live
+    DeploymentPreference:
+      Type: AllAtOnce
+    Timeout: 5
+Outputs:
+  ApigwURL:
+    Description: API Gateway endpoint URL for Prod environment for First Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/trigger
+  CamTrigger:
+    Description: CamTrigger Function ARN
+    Value:
+      Fn::GetAtt:
+      - CamTrigger
+      - Arn
+  PictureTaker:
+    Description: PictureTaker Function ARN
+    Value:
+      Fn::GetAtt:
+      - PictureTaker
+      - Arn
+Resources:
+  CamTrigger:
+    Properties:
+      CodeUri: s3://iot-mirror-eu-central-1/bc0c6942d4081d1fb00fbad1d8bd82f3
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        Api:
+          Properties:
+            Method: GET
+            Path: /trigger
+          Type: Api
+      Handler: cam_trigger.lambda_handler
+      Policies:
+      - Statement:
+        - Action:
+          - iot:Publish
+          - iot:GetThingShadow
+          Effect: Allow
+          Resource: '*'
+        Version: '2012-10-17'
+      Runtime: python3.6
+      Tracing: Active
+    Type: AWS::Serverless::Function
+  PictureResults:
+    Properties:
+      CodeUri: s3://iot-mirror-eu-central-1/b40385524ea23936329cd0b535151e4f
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        Api:
+          Properties:
+            Method: GET
+            Path: /results
+          Type: Api
+      Handler: picture_results.lambda_handler
+      Policies:
+      - Statement:
+        - Action:
+          - iot:Publish
+          - iot:GetThingShadow
+          Effect: Allow
+          Resource: '*'
+        Version: '2012-10-17'
+      Runtime: python3.6
+      Tracing: Active
+    Type: AWS::Serverless::Function
+  PictureTaker:
+    Properties:
+      CodeUri: s3://iot-mirror-eu-central-1/d9460f7edf54d1c47dc37ba99b820bfc
+      Handler: picture_taker.lambda_handler
+      Runtime: python2.7
+      Timeout: 60
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
