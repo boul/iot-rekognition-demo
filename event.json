@@ -1,0 +1,44 @@
+{
+   "version": "1.0",
+   "session": {
+      "new": true,
+      "sessionId": "amzn1.echo-api.session.e3ebd060-b1c9-4610-a27c-2b5ad23cadd9",
+      "application": {
+         "applicationId": "amzn1.ask.skill.4ab65fd6-b2d4-4d4c-8066-14ca4b3506a2"
+      },
+      "user": {
+         "userId": "amzn1.ask.account."
+      }
+   },
+   "context": {
+      "AudioPlayer": {
+         "playerActivity": "FINISHED"
+      },
+      "System": {
+         "application": {
+            "applicationId": "amzn1.ask.skill.4ab65fd6-b2d4-4d4c-8066-14ca4b3506a2"
+         },
+         "user": {
+            "userId": "amzn1.ask.account."
+         },
+         "device": {
+            "deviceId": "amzn1.ask.device.",
+            "supportedInterfaces": {
+               "AudioPlayer": {}
+            }
+         },
+         "apiEndpoint": "https://api.amazonalexa.com",
+         "apiAccessToken": ""
+      }
+   },
+   "request": {
+      "type": "IntentRequest",
+      "requestId": "amzn1.echo-api.request.5b5fec67-b1f6-4730-b97d-4bdd2021f15c",
+      "timestamp": "2018-05-04T20:48:35Z",
+      "locale": "en-US",
+      "intent": {
+         "name": "FaceAnalysis",
+         "confirmationStatus": "NONE"
+      }
+   }
+}

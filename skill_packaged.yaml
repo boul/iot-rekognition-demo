@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'iot_mirror
+
+  Demo of Greengrass Iot PiCam and Rekognition
+
+  '
+Globals:
+  Function:
+    AutoPublishAlias: live
+    DeploymentPreference:
+      Type: AllAtOnce
+    Timeout: 5
+Resources:
+  RekognitionSkill:
+    Properties:
+      CodeUri: s3://iot-mirror-eu-west-1/86a869e2835b57ab27e88910b693606e
+      Events:
+        Alexa:
+          Type: AlexaSkill
+      Handler: rekognition_skill.lambda_handler
+      Runtime: python3.6
+      Timeout: 120
+      Tracing: Active
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

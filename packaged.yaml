@@ -9,7 +9,7 @@ Globals:
     AutoPublishAlias: live
     DeploymentPreference:
       Type: AllAtOnce
-    Timeout: 5
+    Timeout: 5aws-xray-sdk
 Outputs:
   ApigwURL:
     Description: API Gateway endpoint URL for Prod environment for First Function
@@ -78,7 +78,7 @@ Resources:
     Type: AWS::Serverless::Function
   PictureTaker:
     Properties:
-      CodeUri: s3://iot-mirror-eu-central-1/cb42e91e51a5e64c8e4a5961ddeaf467
+      CodeUri: s3://iot-mirror-eu-central-1/5ede4f56c10f13bf7493ea6819c43354
       Handler: picture_taker.lambda_handler
       Runtime: python2.7
       Timeout: 60
