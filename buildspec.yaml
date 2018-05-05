@@ -3,10 +3,11 @@ phases:
   install:
     commands:
       - pip3 install -r requirements.txt -t cam_trigger/build
-      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket bucket-name 
-                                   --output-template-file outputSamTemplate.yaml
+      - cp cam_trigger/cam_trigger.py cam_trigger/build
+      - aws cloudformation package --template-file template.yaml --s3-bucket iot-rekognition-demo-eu-west-1 
+                                   --output-template-file template-output.yaml
 artifacts:
   type: zip
   files:
-    - samTemplate.yaml
-    - outputSamTemplate.yaml
+    - template.yaml
+    - template_output.yaml
