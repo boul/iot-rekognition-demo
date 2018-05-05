@@ -1,0 +1,12 @@
+version: 0.1
+phases:
+  install:
+    commands:
+      - pip3 install -r requirements.txt -t cam_trigger/build
+    #   - aws cloudformation package --template-file samTemplate.yaml --s3-bucket bucket-name 
+                                   --output-template-file outputSamTemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - samTemplate.yaml
+    - outputSamTemplate.yaml
