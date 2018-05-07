@@ -2,7 +2,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file rekognition_skill/skill_template.yaml --s3-bucket iot-rekognition-demo-eu-central-1
+      - aws cloudformation package --template-file picture_taker/template.yaml --s3-bucket iot-rekognition-demo-eu-central-1
                                    --output-template-file template-output.yaml
 
 

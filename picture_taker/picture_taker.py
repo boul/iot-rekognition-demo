@@ -70,7 +70,7 @@ def make_picture():
    
     except Exception as e:
         client.publish(topic='picture/status', payload='Something went wrong!')
-        print e
+        print(e)
    
     finally:
         camera.close()
