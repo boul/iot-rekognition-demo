@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-    iot_mirror
+    iot_rekognition_demo
     
     Demo of Greengrass Iot PiCam and Rekognition
 
@@ -15,8 +15,6 @@ Globals:
             Type: AllAtOnce
 
 Resources:
-
-   
      RekognitionSkill:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
@@ -29,7 +27,10 @@ Resources:
                 Alexa:
                     Type: AlexaSkill
            
-           
+Outputs:
+    RekognitionSkill:
+      Description: "rekognition_skill Function ARN"
+      Value: !GetAtt RekognitionSkill.Arn
            
 
 
