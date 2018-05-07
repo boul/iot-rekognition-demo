@@ -1,4 +1,4 @@
-# iot_mirror
+# iot_rekognition_demo
 
 Demo of Greengrass Iot PiCam and Rekognition
 
