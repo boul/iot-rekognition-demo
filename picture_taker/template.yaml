@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    iot_rekognition_demo
+    
+    Demo of Greengrass Iot PiCam and Rekognition
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 5
+        AutoPublishAlias: live # More info about Safe Deployments: https://github.com/awslabs/serverless-application-model/blob/master/docs/safe_lambda_deployments.rst
+        DeploymentPreference:
+            # Type: Linear10PercentEvery1Minute 
+            Type: AllAtOnce
+
+Resources:
+     PictureTaker:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: .
+            Handler: picture_taker.lambda_handler
+            Runtime: python2.7
+            Timeout: 120
+            Tracing: Active
+           
+Outputs:
+   
+    PictureTaker:
+      Description: "PictureTaker Function ARN"
+      Value: !GetAtt PictureTaker.Arn
+      
+           
+
+
+
+
