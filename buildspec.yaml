@@ -9,7 +9,7 @@ phases:
       - pip3 install -r requirements.txt -t rekognition_skill/build
       - cp rekognition_skill/rekognition_skill.py rekognition_skill/build
       - aws cloudformation package --template-file template.yaml --s3-bucket iot-rekognition-demo-eu-central-1
-                                   --output-template-file template-output.yaml --region eu-central-1
+                                   --output-template-file template-output.yaml
       
 artifacts:
   type: zip
