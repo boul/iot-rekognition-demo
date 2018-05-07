@@ -38,7 +38,7 @@ Resources:
                         Method: GET
             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
                 Variables:
-                    PARAM1: VALUE
+                    REGION: "eu-central-1"
     PictureResults:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
@@ -62,7 +62,7 @@ Resources:
                         Method: GET
             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
                 Variables:
-                    PARAM1: VALUE
+                    REGION: "eu-central-1"
                     
     # PictureTaker:
     #     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -84,6 +84,10 @@ Resources:
             Events:
                 Alexa:
                     Type: AlexaSkill
+             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                Variables:
+                    IMG_URL: "https://s3-eu-west-1.amazonaws.com/roeland-greengrass2/image.png"
+                    API_URL: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
            
            
            
@@ -93,7 +97,7 @@ Outputs:
 
     ApigwURL:
       Description: "API Gateway endpoint URL for Prod environment for First Function"
-      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/trigger"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
 
     CamTrigger:
       Description: "CamTrigger Function ARN"
