@@ -12,7 +12,7 @@ patch_all()
 # html = urlopen("http://www.google.com/")
 # print(html)
 
-api_url = "https://4w9qzehe6d.execute-api.eu-central-1.amazonaws.com/Prod/"
+api_url = "https://3ub0qyjnqi.execute-api.eu-central-1.amazonaws.com/Stage/"
 img_url = "https://s3-eu-west-1.amazonaws.com/roeland-greengrass2/image.png"
 
 def build_speechlet_response(title, output, reprompt_text, should_end_session):

@@ -8,7 +8,6 @@ patch_all()
 
 client = boto3.client('iot-data')
 
-# TEST
 def lambda_handler(event, context):
     
     response = client.get_thing_shadow(thingName='roeland-greengrass1_Core')
