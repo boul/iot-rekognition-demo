@@ -14,8 +14,6 @@ from time import sleep
 
 # Creating a greengrass core sdk client
 client = greengrasssdk.client('iot-data')
-# PiCam client
-camera = picamera.PiCamera()
 
 # Retrieving platform information to send from Greengrass Core
 my_platform = platform.platform()
@@ -69,7 +67,8 @@ def make_picture():
     
     try:
         
-        
+        # PiCam client
+        camera = picamera.PiCamera()
         camera.start_preview()
         # Camera warm-up time
         sleep(2)
