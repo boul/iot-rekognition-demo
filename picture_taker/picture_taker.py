@@ -5,6 +5,7 @@ import time
 import json
 import picamera
 import boto3
+from time import sleep
 
 # from aws_xray_sdk.core import xray_recorder
 # from aws_xray_sdk.core import patch_all
@@ -13,6 +14,8 @@ import boto3
 
 # Creating a greengrass core sdk client
 client = greengrasssdk.client('iot-data')
+# PiCam client
+camera = picamera.PiCamera()
 
 # Retrieving platform information to send from Greengrass Core
 my_platform = platform.platform()
@@ -65,7 +68,11 @@ def make_picture():
     client.publish(topic='picture/status', payload='About to take picture')
     
     try:
-        camera = picamera.PiCamera()
+        
+        
+        camera.start_preview()
+        # Camera warm-up time
+        sleep(2)
         camera.capture('/output/lambda-image.png')
    
     except Exception as e:
