@@ -16,7 +16,7 @@ my_platform = platform.platform()
 
 region = os.environ['REKOGNITION_REGION']
 bucket = os.environ['S3_BUCKET_NAME']
-thingname = os.environ['THING_NAME']
+thing_name = os.environ['THING_NAME']
 
 def lambda_handler(event, context):
     
@@ -54,10 +54,11 @@ def lambda_handler(event, context):
     reported['state']['reported']['faces'] = faces
     reported['state']['reported']['labels'] = labels
     jsonresponse = json.dumps(reported)
-   
+    
     # print reported
     # client.publish(topic='$aws/things/roeland-greengrass1_Core/shadow/update', payload=jsonresponse)
-    client.update_thing_shadow(thingname, jsonresponse)
+    client.update_thing_shadow(thingName=thing_name, payload=jsonresponse.encode())
+    
     return
 
 # @xray_recorder.capture('## make_picture')
