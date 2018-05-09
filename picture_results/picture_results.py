@@ -6,12 +6,14 @@ from aws_xray_sdk.core import patch_all
 
 patch_all()
 
-region = os.environ['REGION']
+thing_name = os.environ['THING_NAME']
+region = os.environ['IOT_REGION']
+
 client = boto3.client('iot-data', region_name=region)
 
 def lambda_handler(event, context):
     
-    response = client.get_thing_shadow(thingName='roeland-greengrass1_Core')
+    response = client.get_thing_shadow(thingName=thing_name)
  
     streamingBody = response["payload"]
     jsonState = json.loads(streamingBody.read())

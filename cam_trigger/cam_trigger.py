@@ -7,7 +7,7 @@ from aws_xray_sdk.core import patch_all
 
 patch_all()
 
-region = os.environ['REGION']
+region = os.environ['IOT_REGION']
 client = boto3.client('iot-data', region_name=region)
 
 def lambda_handler(event, context):

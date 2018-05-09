@@ -38,7 +38,7 @@ Resources:
                         Method: GET
             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
                 Variables:
-                    REGION: "eu-central-1"
+                    IOT_REGION: "eu-central-1"
     PictureResults:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
@@ -62,7 +62,8 @@ Resources:
                         Method: GET
             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
                 Variables:
-                    REGION: "eu-central-1"
+                    IOT_REGION: "eu-central-1"
+                    THING_NAME: "roeland-greengrass1_Core"
                     
     # PictureTaker:
     #     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction

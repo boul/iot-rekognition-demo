@@ -5,18 +5,16 @@ import time
 import json
 import picamera
 import boto3
+import os
 from time import sleep
-
-# from aws_xray_sdk.core import xray_recorder
-# from aws_xray_sdk.core import patch_all
-
-# patch_all()
 
 # Creating a greengrass core sdk client
 client = greengrasssdk.client('iot-data')
 
 # Retrieving platform information to send from Greengrass Core
 my_platform = platform.platform()
+
+region = os.environ['REKOGNITION_REGION']
 
 def lambda_handler(event, context):
     

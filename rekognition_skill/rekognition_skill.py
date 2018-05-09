@@ -9,12 +9,7 @@ from aws_xray_sdk.core import patch_all
 
 patch_all()
 
-# html = urlopen("http://www.google.com/")
-# print(html)
-
-# api_url = "https://3ub0qyjnqi.execute-api.eu-central-1.amazonaws.com/Stage/"
 api_url = region = os.environ['API_URL']
-# img_url = "https://s3-eu-west-1.amazonaws.com/roeland-greengrass2/image.png"
 img_url = region = os.environ['IMG_URL']
 
 def build_speechlet_response(title, output, reprompt_text, should_end_session):
@@ -70,7 +65,6 @@ def build_response(session_attributes, speechlet_response):
         'response': speechlet_response
     }
 
-
 # --------------- Functions that control the skill's behavior ------------------
 
 def get_welcome_response():
@@ -90,7 +84,6 @@ def get_welcome_response():
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
-
 
 def handle_session_end_request():
     card_title = "Session Ended"
@@ -212,7 +205,8 @@ def face_analysis(intent, session):
             
             gender_output = "I'm for " + str(gender_conf) + \
                 " percent certain, that you are a " + gender + ".\n"
-            age_output = "You are roughly " + str(int(age_avg)) + " years old. \n"
+            age_output = "You are roughly " + str(int(age_avg)) + \
+                " years old. \n"
             
             # print("gender" + gender_output)
             # print("age" + age_output)
@@ -223,7 +217,8 @@ def face_analysis(intent, session):
                 smile_output = "It seems that you are not smiling. \n"
                 
             if eyeglasses:
-                eyeglasses_output = "I see that you are wearing nice glasses! \n"
+                eyeglasses_output = "I see that you are wearing nice"\
+                    "glasses! \n"
             else:
                 eyeglasses_output = ""
                 
@@ -256,7 +251,8 @@ def face_analysis(intent, session):
     except IndexError as e:
        
         print(e)
-        speech_output = "I was not able to see your face. Ask me to take a new picture!"
+        speech_output = "I was not able to see your face."\
+          " Ask me to take a new picture!"
         should_end_session = False
 
     output = speech_output
@@ -284,7 +280,8 @@ def take_picture(intent, session):
     reprompt_text = None
     should_end_session = False
     return build_response(session_attributes, build_std_speechlet_response(
-        card_title, speech_output, reprompt_text, should_end_session, img_url, img_url))
+        card_title, speech_output, reprompt_text, should_end_session, 
+        img_url, img_url))
 
 # --------------- Events ------------------
 
@@ -293,7 +290,6 @@ def on_session_started(session_started_request, session):
 
     print("on_session_started requestId=" + session_started_request['requestId']
           + ", sessionId=" + session['sessionId'])
-
 
 def on_launch(launch_request, session):
     """ Called when the user launches the skill without specifying what they
@@ -304,8 +300,6 @@ def on_launch(launch_request, session):
           ", sessionId=" + session['sessionId'])
     # Dispatch to your skill's launch
     return get_welcome_response()
-
-
 
 def on_intent(intent_request, session):
     """ Called when the user specifies an intent for this skill """
@@ -330,7 +324,6 @@ def on_intent(intent_request, session):
         return handle_session_end_request()
     else:
         raise ValueError("Invalid intent")
-
 
 def on_session_ended(session_ended_request, session):
     """ Called when the user ends the session.
