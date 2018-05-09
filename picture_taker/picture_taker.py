@@ -56,8 +56,8 @@ def lambda_handler(event, context):
     jsonresponse = json.dumps(reported)
     
     # print reported
-    # client.publish(topic='$aws/things/roeland-greengrass1_Core/shadow/update', payload=jsonresponse)
-    client.update_thing_shadow(thingName=thing_name, payload=jsonresponse)
+    client.publish(topic="$aws/things/" + thing_name + "/shadow/update", payload=jsonresponse)
+    # client.update_thing_shadow(thingName=thing_name, payload=jsonresponse)
     
     return
 
