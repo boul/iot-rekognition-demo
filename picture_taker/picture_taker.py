@@ -25,7 +25,8 @@ def lambda_handler(event, context):
     client.publish(topic='picture/status', payload='Picture taken!')
     s3 = boto3.resource('s3')
 
-    # s3.meta.client.upload_file('/output/lambda-image.png', 'roeland-greengrass', 'image.png')
+    # s3.meta.client.upload_file('/output/lambda-image.png', 
+        # 'roeland-greengrass', 'image.png')
     s3.meta.client.upload_file('/output/lambda-image.png', bucket, 'image.png')
     rekogclient = boto3.client('rekognition', region)
 
@@ -56,7 +57,8 @@ def lambda_handler(event, context):
     jsonresponse = json.dumps(reported)
     
     # print reported
-    client.publish(topic="$aws/things/" + thing_name + "/shadow/update", payload=jsonresponse)
+    client.publish(topic="$aws/things/" + thing_name + "/shadow/update",
+        payload=jsonresponse)
     # client.update_thing_shadow(thingName=thing_name, payload=jsonresponse)
     
     return

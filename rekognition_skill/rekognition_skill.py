@@ -274,7 +274,7 @@ def take_picture(intent, session):
     trigger_cam(api_url)
     session_attributes = {}
     card_title = "Take Picture"
-    speech_output = "Say Cheese!! I've sent the request to take a new picture!"
+    speech_output = "Say Cheese!! And smile! I've sent the request to take a new picture!"
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
     reprompt_text = None
