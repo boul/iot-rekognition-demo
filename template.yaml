@@ -11,8 +11,8 @@ Globals:
         Timeout: 5
         AutoPublishAlias: live # More info about Safe Deployments: https://github.com/awslabs/serverless-application-model/blob/master/docs/safe_lambda_deployments.rst
         DeploymentPreference:
-            # Type: Linear10PercentEvery1Minute 
-            Type: AllAtOnce
+            Type: Linear10PercentEvery1Minute 
+            # Type: AllAtOnce
 
 Resources:
     CamTrigger:
