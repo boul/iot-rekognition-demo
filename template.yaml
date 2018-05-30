@@ -36,6 +36,10 @@ Resources:
                     Properties:
                         Path: /trigger
                         Method: GET
+                IotRule:
+                    Type: IoTRule
+                    Properties:
+                        Sql: "SELECT * FROM 'iotbutton/G030JF055524379N'"
             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
                 Variables:
                     IOT_REGION: "eu-central-1"
@@ -89,7 +93,23 @@ Resources:
                 Variables:
                     IMG_URL: "https://s3-eu-west-1.amazonaws.com/roeland-greengrass2/image.png"
                     API_URL: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
-           
+    
+    # IotButtonTrigger:
+    #     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    #     Properties:
+    #         CodeUri: iot_button_trigger/build
+    #         Handler: iot_button_trigger.lambda_handler
+    #         Runtime: python3.6
+    #         Timeout: 120
+    #         Tracing: Active
+    #         Events:
+    #             Type: IoTRule
+    #             Properties:
+    #                 Sql: "SELECT * FROM 'iotbutton/G030JF055524379N'"
+    #         # Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+    #         #     Variables:
+    #         #         IMG_URL: "https://s3-eu-west-1.amazonaws.com/roeland-greengrass2/image.png"
+    #         #         API_URL: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"       
            
            
 
